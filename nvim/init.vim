@@ -1,6 +1,5 @@
 " =========================
 " 基本
-" =========================
 set shell=/bin/zsh
 set shiftwidth=4
 set tabstop=4
