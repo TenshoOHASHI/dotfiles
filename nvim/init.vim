@@ -36,6 +36,9 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'epwalsh/obsidian.nvim'
 
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
 call plug#end()
 
 " =========================
