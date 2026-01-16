@@ -1,23 +1,34 @@
 -- ~/.config/nvim/lua/obsidian_setup.lua
--- Obsidian vault を Neovim で扱う基本設定
+-- Obsidian vault を Neovim で扱う基本設定（vault を動的に自動検出）
 
 local ok, obsidian = pcall(require, "obsidian")
 if not ok then
   return
 end
 
+-- ====== Vault の自動検出（おすすめ：cwd ベース） ======
+-- ルール:
+--   - cwd が ~/vaults/<name> または ~/vaults/<name>/... の場合、その <name> を workspace にする
+--   - それ以外はデフォルト vault（M4）へフォールバック
+local home = vim.fn.expand("~")
+local vaults_root = home .. "/vaults"
+
+local cwd = vim.fn.getcwd()
+local vault_name = cwd:match("^" .. vim.pesc(vaults_root) .. "/([^/]+)")
+local vault_path = vault_name and (vaults_root .. "/" .. vault_name) or (vaults_root .. "/M4")
+
+-- vault が実在しない場合は安全にデフォルトへ
+if vim.fn.isdirectory(vault_path) == 0 then
+  vault_name = "M4"
+  vault_path = vaults_root .. "/M4"
+end
+
+-- ====== Obsidian.nvim setup ======
 obsidian.setup({
   workspaces = {
     {
-      name = "personal",
-      path = vim.fn.expand("~/vaults/personal"),
-      overrides = {
-        notes_subdir = "notes",
-      },
-    },
-    {
-      name = "work",
-      path = vim.fn.expand("~/vaults/work"),
+      name = vault_name or "M4",
+      path = vault_path,
       overrides = {
         notes_subdir = "notes",
       },
@@ -94,7 +105,7 @@ obsidian.setup({
 
   attachments = {
     -- 画像は vault 直下からの相対パスで保存される（デフォルト先をここで指定）
-    -- コマンド: :ObsidianPasteImg で貼り付け可能 :contentReference[oaicite:0]{index=0}
+    -- コマンド: :ObsidianPasteImg で貼り付け可能
     img_folder = "notes/assets",
   },
 
@@ -119,9 +130,8 @@ obsidian.setup({
   callbacks = {
     post_setup_workspace = function(_, workspace)
       vim.schedule(function()
-        print("Obsidian workspace ready: " .. workspace.name)
+        print("Obsidian workspace ready: " .. workspace.name .. " (" .. workspace.path .. ")")
       end)
     end,
   },
 })
-

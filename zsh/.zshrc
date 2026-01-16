@@ -151,3 +151,6 @@ setopt inc_append_history
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# CLAUDE
+export CLAUDE_CODE_MAX_OUTPUT_TOKENS=128000
