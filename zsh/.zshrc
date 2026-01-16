@@ -1,5 +1,4 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -81,7 +80,7 @@ plugins=(git autojump web-search python golang fzf zsh-syntax-highlighting)
 # zsh-autosuggestions
 
 source $ZSH/oh-my-zsh.sh
-
+source ~/fzf-git.sh/fzf-git.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -139,8 +138,6 @@ alias view="nvim -R"
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
-alias relogin="exec $SHELLL -l"
-
 # setopt no-beep
 setopt auto_pushd
 setopt pushd_ignore_dups
@@ -154,3 +151,23 @@ setopt inc_append_history
 
 # CLAUDE
 export CLAUDE_CODE_MAX_OUTPUT_TOKENS=128000
+
+# --hidden : ドットファイル/隠しファイルも含める 
+# --exclude .git : .git ディレクトリを除外（速度改善・ノイズ除去）, 
+# --strip-cwd-p# refix : 出力パスを カレント相対に揃える（fzf で見やすい）
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+
+# fzf の代表的キーバインド Ctrl-T（ファイル挿入） が使う列挙コマンドを上の fd … に固定します。
+# 結果として、Ctrl-T の候補が fd ベースになります。
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# fzf の Alt-C（ディレクトリへ cd） 用の列挙コマンドを fd --type=d（ディレクトリのみ）にしています。
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+_fzf_compgen_path() {
+  fd --hidden --exclude .git . "$1"
+}
+
+_fzf_compgen_dir() {
+  fd --type=d --hidden --exclude .git . "$1"
+}
