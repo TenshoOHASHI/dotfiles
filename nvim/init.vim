@@ -47,8 +47,21 @@ call plug#end()
 set termguicolors
 colorscheme horizon
 
+" gitgutter 
 let g:lightline = {}
 let g:lightline.colorscheme = 'horizon'
+
+augroup MyGitGutterHighlights
+  autocmd!
+  autocmd ColorScheme * highlight GitGutterAdd      guifg=#7fdc7f gui=bold
+  autocmd ColorScheme * highlight GitGutterChange   guifg=#ffd27f gui=bold
+  autocmd ColorScheme * highlight GitGutterDelete   guifg=#ff7f7f gui=bold
+
+  " 行背景が使える場合（配色・設定によって効きます）
+  autocmd ColorScheme * highlight GitGutterAddLine    guibg=#1f3a1f
+  autocmd ColorScheme * highlight GitGutterChangeLine guibg=#3a2f1f
+  autocmd ColorScheme * highlight GitGutterDeleteLine guibg=#3a1f1f
+augroup END
 
 let g:gitgutter_highlight_lines = 1
 

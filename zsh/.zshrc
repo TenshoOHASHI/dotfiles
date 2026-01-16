@@ -172,5 +172,36 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
+# fzf completion preview customization (zsh)
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)
+      fzf --preview 'eza --tree --color=always {} | head -200' "$@"
+      ;;
+    export|unset)
+      fzf --preview 'eval "echo \${}"' "$@"
+      ;;
+    ssh)
+      fzf --preview 'dig {}' "$@"
+      ;;
+    *)
+      fzf --preview 'bat -n --color=always --line-range :500 {}' "$@"
+      ;;
+  esac
+}
+
+export FZF_CTRL_T_OPTS="
+  --preview 'bat -n --color=always --line-range :500 {}'
+  --preview-window 'right:60%:wrap'
+  --bind 'ctrl-f:preview-page-down,ctrl-b:preview-page-up'
+  --bind 'ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up'
+  --bind 'alt-up:preview-up,alt-down:preview-down'
+"
+
+export BAT_THEME="tokyonight_night"
+
 alias lsgit='eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions --tree --level=3'
 alias lsgitsf="git status --porcelain | fzf"
