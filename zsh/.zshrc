@@ -173,3 +173,4 @@ _fzf_compgen_dir() {
 }
 
 alias lsgit='eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions --tree --level=3'
+alias lsgitsf="git status --porcelain | fzf"
