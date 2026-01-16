@@ -171,3 +171,5 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
+
+alias lsgit='eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions --tree --level=3'
