@@ -38,6 +38,7 @@ Plug 'epwalsh/obsidian.nvim'
 
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 call plug#end()
 
@@ -45,7 +46,11 @@ call plug#end()
 " 見た目
 " =========================
 set termguicolors
-colorscheme horizon
+set background=dark
+let g:tokyonight_style = "night"   " night / storm / moon / day
+colorscheme tokyonight
+
+" colorscheme horizon
 
 " gitgutter 
 let g:lightline = {}

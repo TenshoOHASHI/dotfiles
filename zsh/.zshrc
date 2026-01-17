@@ -202,6 +202,31 @@ export FZF_CTRL_T_OPTS="
 "
 
 export BAT_THEME="tokyonight_night"
-
+alias lsc='eza --color=auto --color-scale'
 alias lsgit='eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions --tree --level=3'
 alias lsgitsf="git status --porcelain | fzf"
+alias cd="z"
+
+eval $(thefuck --alias)
+eval $(thefuck --alias fk)
+eval "$(zoxide init zsh)"
+
+# # --- TokyoNight (night) fzf theme ---
+# fg="#CBE0F0"
+# bg="#011628"
+# purple="#B388FF"
+# blue="#06BCE4"
+# cyan="#2CF9ED"
+# # 選択行の背景を少し明るめに（見やすさ）
+# bghl="#0B2942"
+#
+# export FZF_DEFAULT_OPTS="
+#   --ansi
+#   --color=fg:${fg},bg:${bg},hl:${purple}
+#   --color=fg+:${fg},bg+:${bghl},hl+:${cyan}
+#   --color=info:${blue},prompt:${cyan},pointer:${cyan},marker:${purple},spinner:${blue},header:${purple}
+#   --color=border:${blue},label:${purple},query:${fg}
+#   --border=rounded
+#   --prompt='❯ '
+# "
+
