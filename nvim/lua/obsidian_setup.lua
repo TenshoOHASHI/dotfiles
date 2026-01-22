@@ -29,15 +29,13 @@ obsidian.setup({
     {
       name = vault_name or "M4",
       path = vault_path,
-      overrides = {
-        notes_subdir = "notes",
-      },
+      -- overrides を削除（notes_subdir を固定しない）
     },
   },
 
-  -- 新規ノートは notes_subdir 配下へ
-  notes_subdir = "notes",
-  new_notes_location = "notes_subdir",
+  -- 新規ノートは現在のバッファのディレクトリに保存
+  notes_subdir = nil,  -- nil で固定サブディレクトリを使用しない
+  new_notes_location = "current_dir",
 
   daily_notes = {
     folder = "notes/dailies",
@@ -74,8 +72,7 @@ obsidian.setup({
     -- note_mappings を “書かない” ＝デフォルトに任せるのが安全
   },
 
-  -- ここは obsidian.nvim が markdown バッファに対して設定する “内部マッピング”
-  -- Enter は "cr" ではなく "<cr>" と書く必要があります（空文字も不可）
+  -- ここは obsidian.nvim が markdown バッファに対して設定する "内部マッピング"
   mappings = {
     ["gf"] = {
       action = function()
@@ -83,7 +80,9 @@ obsidian.setup({
       end,
       opts = { noremap = false, expr = true, buffer = true },
     },
-    ["<cr>"] = {
+    -- Ctrl+i (Tab) と競合しないよう、Ctrl+g に変更
+    -- Ctrl+g でリンクをジャンプ、チェックボックスをトグル
+    ["<C-g>"] = {
       action = function()
         return require("obsidian").util.smart_action()
       end,

@@ -76,8 +76,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git autojump web-search python golang fzf zsh-syntax-highlighting)
-# zsh-autosuggestions
+plugins=(git autojump web-search python golang fzf zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 source ~/fzf-git.sh/fzf-git.sh
@@ -210,3 +209,34 @@ alias cd="z"
 eval $(thefuck --alias)
 eval $(thefuck --alias fk)
 eval "$(zoxide init zsh)"
+
+# ========================================
+# Git エイリアス
+# ========================================
+alias gs='git status'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gco='git switch'
+alias gc='git commit -v'
+alias gca='git commit -v --amend'
+alias gp='git push'
+alias gpf='git push --force'
+alias gl='git log --oneline --graph --decorate --all'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias ga='git add'
+alias gaa='git add .'
+alias gf='git fetch'
+alias gpl='git pull'
+alias gm='git merge'
+alias gr='git rebase'
+alias grs='git reset'
+alias grsh='git reset --hard'
+alias gcl='git clone'
+alias gst='git stash'
+alias gsta='git stash apply'
+alias gstd='git stash drop'
+alias gstp='git stash pop'
+export CLAUDE_CODE_MAX_OUTPUT_TOKENS=100000
+
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
