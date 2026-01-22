@@ -156,6 +156,9 @@ export CLAUDE_CODE_MAX_OUTPUT_TOKENS=128000
 # --strip-cwd-p# refix : 出力パスを カレント相対に揃える（fzf で見やすい）
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 
+# fzf 全体の設定: リストを上から表示、カーソルを一番上に
+export FZF_DEFAULT_OPTS="--layout=reverse --height 50% --inline-info"
+
 # fzf の代表的キーバインド Ctrl-T（ファイル挿入） が使う列挙コマンドを上の fd … に固定します。
 # 結果として、Ctrl-T の候補が fd ベースになります。
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
