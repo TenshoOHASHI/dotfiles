@@ -157,7 +157,7 @@ export CLAUDE_CODE_MAX_OUTPUT_TOKENS=128000
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 
 # fzf 全体の設定: リストを上から表示、カーソルを一番上に
-export FZF_DEFAULT_OPTS="--layout=reverse --height 50% --inline-info"
+export FZF_DEFAULT_OPTS="--layout=reverse --height 50% --inline-info --bind 'ctrl-f:preview-page-down,ctrl-b:preview-page-up'"
 
 # fzf の代表的キーバインド Ctrl-T（ファイル挿入） が使う列挙コマンドを上の fd … に固定します。
 # 結果として、Ctrl-T の候補が fd ベースになります。
