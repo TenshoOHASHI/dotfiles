@@ -243,3 +243,4 @@ alias gstp='git stash pop'
 export CLAUDE_CODE_MAX_OUTPUT_TOKENS=100000
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="$PATH:$(npm config get prefix)/bin"
